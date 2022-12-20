@@ -1,0 +1,43 @@
+{
+  "name": "jmc-login",
+  "version": "1.0.0",
+  "description": "login",
+  "author": "1396933943@qq.com",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-bump": "^3.2.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "husky": "~4.2.5",
+    "sass": "^1.54.9"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "gulp",
+    "node": "node node/openBrowser",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ff-authority"
+  ],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "engines": {
+    "node": ">=8.9",
+    "npm": ">= 3.0.0"
+  },
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-push": "node node/openBrowser"
+    }
+  }
+}
