@@ -7,7 +7,7 @@
 ![https://github.com/wang12321/jmc-login](https://img.shields.io/github/license/wang12321/jmc-login)
 ### jmc-login 是统一登入中间件
 # 使用环境(推荐)
-node > 10.x
+node = 10.x
 
 npm > 6.x
 
