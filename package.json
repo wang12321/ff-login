@@ -24,7 +24,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "ff-authority"
+    "jmc-login"
   ],
   "browserslist": [
     "> 1%",
