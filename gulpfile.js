@@ -1,10 +1,10 @@
 var gulp = require('gulp');
-const uglify = require('gulp-uglify');
+// const uglify = require('gulp-uglify');
 var bump = require('gulp-bump');
-const sass = require('gulp-sass')(require('sass'));
+// const sass = require('gulp-sass')(require('sass'));
 var babel = require("gulp-babel");
 
-gulp.task('js',['bump'], function () {
+gulp.task('js',['api','image','login','utils','bump', 'verifition'], function () {
     return gulp.src('./bin/*.js') // read all
         .pipe(babel({
             presets: ['@babel/preset-env']
@@ -12,30 +12,56 @@ gulp.task('js',['bump'], function () {
         .pipe(gulp.dest('./lib'));
 });
 
-gulp.task('directive', function () {
-    return gulp.src('./bin/directive/*.js') // read all
+gulp.task('api', function () {
+    return gulp.src('./bin/api/*.js') // read all
         .pipe(babel({
             presets: ['@babel/preset-env']
         }))
-        .pipe(gulp.dest('./lib/directive'));
+        .pipe(gulp.dest('./lib/api'));
 });
 
-gulp.task('sidebarViewCss', function () {
-    return gulp.src('./bin/sidebar/*.scss') // read all
-        .pipe(sass())
-        .pipe(gulp.dest('./lib/sidebar'));
+gulp.task('image', function () {
+    return gulp.src('./bin/image/*') // read all
+        .pipe(gulp.dest('./lib/image'));
 });
 
-gulp.task('menuImport', function () {
-    return gulp.src('./bin/menuImport/*.vue') // read all
-        .pipe(gulp.dest('./lib/menuImport'));
+gulp.task('login', function () {
+    return gulp.src('./bin/login/*.vue') // read all
+        .pipe(gulp.dest('./lib/login'));
 });
-gulp.task('sidebar',['sidebarView','sidebarViewCss','ffButton','menuImport'], function () {
-    return gulp.src('./bin/sidebar/*.js') // read all
+
+gulp.task('utils', function () {
+    return gulp.src('./bin/utils/*.js') // read all
         .pipe(babel({
             presets: ['@babel/preset-env']
         }))
-        .pipe(gulp.dest('./lib/sidebar'));
+        .pipe(gulp.dest('./lib/utils'));
+});
+
+gulp.task('verifition',['verifitionUtils','verifitionApi','Verify'], function () {
+    return gulp.src('./bin/verifition/*.vue') // read all
+        .pipe(gulp.dest('./lib/verifition'));
+});
+
+gulp.task('verifitionUtils', function () {
+    return gulp.src('./bin/verifition/utils/*.js') // read all
+        .pipe(babel({
+            presets: ['@babel/preset-env']
+        }))
+        .pipe(gulp.dest('./lib/verifition/utils'));
+});
+gulp.task('verifitionApi', function () {
+    return gulp.src('./bin/verifition/api/*.js') // read all
+        .pipe(babel({
+            presets: ['@babel/preset-env']
+        }))
+        .pipe(gulp.dest('./lib/verifition/api'));
+});
+
+
+gulp.task('Verify', function () {
+    return gulp.src('./bin/verifition/Verify/*.vue') // read all
+        .pipe(gulp.dest('./lib/verifition/Verify'));
 });
 
 gulp.task('bump',function(){
