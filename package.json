@@ -13,7 +13,9 @@
     "gulp-sass": "^5.1.0",
     "gulp-uglify": "^3.0.2",
     "husky": "~4.2.5",
-    "sass": "^1.54.9"
+    "sass": "^1.54.9",
+    "jsencrypt": "^3.0.0-rc.1",
+    "crypto-js": "^4.1.1"
   },
   "files": [
     "lib"
