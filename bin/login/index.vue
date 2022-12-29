@@ -86,6 +86,17 @@ import { Message } from 'element-ui'
 import Verify from '../verifition/Verify'
 export default {
   name: 'Login',
+  props:{
+    env:{
+      type: String,
+      default: 'dev'
+    },
+    identifier:{
+      type: String,
+      default: 'bpr'
+    }
+  },
+
   components: {
     Verify
   },
@@ -119,7 +130,7 @@ export default {
           {
             required: true,
             pattern: new RegExp(
-              '(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,16}'
+                '(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,16}'
             ),
             message: '密码长度为8-16个字符，需包含字母，数字及特殊字符',
             trigger: 'blur'
@@ -130,7 +141,7 @@ export default {
           {
             required: true,
             pattern: new RegExp(
-              '(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,16}'
+                '(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,16}'
             ),
             message: '密码长度为8-16个字符，需包含字母，数字及特殊字符',
             trigger: 'blur'
@@ -194,13 +205,15 @@ export default {
     })
     var str = window.location.host
     var temp = 'PC'
-    if (!(str.indexOf('uat') > -1 || str.indexOf('test') > -1)) {
+    var state = this.identifier
+    if (this.env === 'prod') {
       window.WwLogin({
         id: 'wx_reg',
         appid: 'wwb4831091dc524569',
         agentid: '1000112',
         redirect_uri:
-          `https%3A%2F%2F${str}%2Fapi%2Fbiz%2Flc%2Fwxlogin%2Flogin%3Fdomain%3Dztool`,
+            'https%3A%2F%2Fztool.jmc.com.cn%2Fapi%2Fbiz%2Flc%2Fwxlogin%2Flogin%3Fdomain%3D' +
+            state,
         state: temp,
         href: 'data:text/css;base64,LmltcG93ZXJCb3ggLnFyY29kZSB7d2lkdGg6IDI0MHB4O30NCi5pbXBvd2VyQm94IC50aXRsZSB7ZGlzcGxheTogbm9uZTt9DQouaW1wb3dlckJveCAuaW5mb3tkaXNwbGF5OiBub25lO30NCi5pbXBvd2VyQm94IC5pbmZvIHt3aWR0aDogMjQwcHg7fQ0KLnN0YXR1c19pY29uIHtkaXNwbGF5OiBub25lfQ0KLmltcG93ZXJCb3ggLnN0YXR1cyB7dGV4dC1hbGlnbjogY2VudGVyO30='
       })
@@ -210,7 +223,8 @@ export default {
         appid: 'ww15f4c7e6110b0909',
         agentid: '1000002',
         redirect_uri:
-          `https%3A%2F%2F${str}%2Fapi%2Fbiz%2Flc%2Fwxlogin%2Flogin%3Fdomain%3Dztool`,
+            'https%3A%2F%2Fuatztool.jmc.com.cn%2Fapi%2Fbiz%2Flc%2Fwxlogin%2Flogin%3Fdomain%3D' +
+            state,
         state: temp,
         href: 'data:text/css;base64,LmltcG93ZXJCb3ggLnFyY29kZSB7d2lkdGg6IDI0MHB4O30NCi5pbXBvd2VyQm94IC50aXRsZSB7ZGlzcGxheTogbm9uZTt9DQouaW1wb3dlckJveCAuaW5mb3tkaXNwbGF5OiBub25lO30NCi5pbXBvd2VyQm94IC5pbmZvIHt3aWR0aDogMjQwcHg7fQ0KLnN0YXR1c19pY29uIHtkaXNwbGF5OiBub25lfQ0KLmltcG93ZXJCb3ggLnN0YXR1cyB7dGV4dC1hbGlnbjogY2VudGVyO30='
       })
@@ -269,7 +283,7 @@ export default {
       this.loginForm = {
         username: username === undefined ? this.loginForm.username : username,
         password:
-          password === undefined ? this.loginForm.password : decrypt(password),
+            password === undefined ? this.loginForm.password : decrypt(password),
         rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
       }
     },
@@ -290,9 +304,9 @@ export default {
       }
       var encryptor = new this.$JSEncrypt()
       var pubKey =
-        '-----BEGIN PUBLIC KEY-----' +
-        this.publicKey +
-        '-----END PUBLIC KEY-----'
+          '-----BEGIN PUBLIC KEY-----' +
+          this.publicKey +
+          '-----END PUBLIC KEY-----'
       encryptor.setPublicKey(pubKey)
       // this.$store
       //   .dispatch('Login', )
