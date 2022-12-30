@@ -23,7 +23,10 @@ export function loginApi(userInfo) {
 }
 
 // 获取用户信息
-export function getInfoApi() {
+export function getInfoApi(token) {
+  if(token){
+    setToken(token)
+  }
   return new Promise((resolve, reject) => {
     getUserInfo().then(res => {
       resolve(res)
